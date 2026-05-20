@@ -4,10 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://cans3ib37iggd" path="res://Assets/background/rocks_2.png" id="2_qxrlw"]
 [ext_resource type="PackedScene" uid="uid://conn4bs0pciuy" path="res://Scenes/Tappy.tscn" id="3_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://cnfpsopn72oo7" path="res://Scenes/Barrier.tscn" id="4_3dryh"]
-[ext_resource type="PackedScene" uid="uid://dv23s2203vqio" path="res://Scenes/Pipes.tscn" id="5_wowpa"]
+[ext_resource type="PackedScene" uid="uid://drwde6j2wfxkb" path="res://Scenes/GameUi.tscn" id="5_wowpa"]
 
-[node name="Game" type="Node2D" unique_id=974141202]
+[node name="Game" type="Node2D" unique_id=974141202 node_paths=PackedStringArray("_spawnTimer", "_pipesHolder", "_upperMarker", "_lowerMarker")]
 script = ExtResource("1_ebmjs")
+_spawnTimer = NodePath("SpawnTimer")
+_pipesHolder = NodePath("PipesHolder")
+_upperMarker = NodePath("UpperSpawn")
+_lowerMarker = NodePath("LowerSpawn")
 
 [node name="Rocks2" type="Sprite2D" parent="." unique_id=1157433534]
 position = Vector2(252, 309)
@@ -18,5 +22,18 @@ position = Vector2(87, 528)
 
 [node name="Barrier" parent="." unique_id=1113494760 instance=ExtResource("4_3dryh")]
 
-[node name="Pipes" parent="Barrier" unique_id=435006133 instance=ExtResource("5_wowpa")]
-position = Vector2(228, 516)
+[node name="UpperSpawn" type="Marker2D" parent="." unique_id=1349182384]
+position = Vector2(540, 270)
+
+[node name="LowerSpawn" type="Marker2D" parent="." unique_id=755144556]
+position = Vector2(540, 550)
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=123265823]
+wait_time = 1.2
+autostart = true
+
+[node name="PipesHolder" type="Node2D" parent="." unique_id=1844104997]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1375420260]
+
+[node name="GameUI" parent="CanvasLayer" unique_id=153501524 instance=ExtResource("5_wowpa")]

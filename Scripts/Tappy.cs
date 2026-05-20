@@ -6,18 +6,30 @@ public partial class Tappy : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	private float _gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 	const float JUMP_POWER = -350.0f;
-	[Export] AnimatedSprite2D sprite;
 
+	public const string GROUP_NAME = "tappy";
+	[Export] AnimatedSprite2D sprite;
+	[Export] AnimationPlayer animator;
+
+	
+	
 	private bool _isJumped = false;
 	public override void _Ready()
 	{
 	}
+
+    public override void _EnterTree()
+    {
+		AddToGroup(GROUP_NAME);
+    }
+
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
 		if (@event.IsActionPressed("jump"))
 		{
 			_isJumped = true;
+			animator.Play("jump");
 		}
 	}
 
@@ -26,7 +38,7 @@ public partial class Tappy : CharacterBody2D
 	{
 		Vector2 velocity = Velocity;
 
-		velocity.X = 100;
+		//velocity.X = 100;
 
 		if (_isJumped)
 		{
@@ -50,10 +62,12 @@ public partial class Tappy : CharacterBody2D
 
 	}
 
-    private void Die()
-    {
+	public void Die()
+	{
+		SignalHub.EmitTappyDiedSignal();
 		SetPhysicsProcess(false);
 		sprite.Stop();
+		//GetTree().Paused = true;
     }
 
     private void ApplyGravity(double delta)

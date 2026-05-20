@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://drwde6j2wfxkb"]
+
+[ext_resource type="FontFile" uid="uid://cneedlbnotp5q" path="res://Assets/fonts/LuckiestGuy-Regular.ttf" id="1_ar76i"]
+[ext_resource type="Script" uid="uid://dfh0r26luo6sl" path="res://Scenes/GameUi.cs" id="1_hukmd"]
+[ext_resource type="LabelSettings" uid="uid://bdhxuiryljx7l" path="res://Resources/LabelBlue48.tres" id="2_hukmd"]
+[ext_resource type="AudioStream" uid="uid://wjnyhwhbyrd" path="res://Assets/audio/game_over.wav" id="4_6wd7v"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6wd7v"]
+font = ExtResource("1_ar76i")
+font_size = 32
+font_color = Color(0.8666667, 0.20392157, 0.14509805, 1)
+outline_size = 10
+outline_color = Color(0.2603207, 0.028350808, 0.014751257, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ar76i"]
+font = ExtResource("1_ar76i")
+font_size = 48
+font_color = Color(0.74928486, 0.6462365, 0.9734258, 1)
+outline_size = 10
+outline_color = Color(0.0002575958, 0.20206007, 0.6702326, 1)
+
+[node name="GameUI" type="Control" unique_id=153501524 node_paths=PackedStringArray("_gameOverLabel", "_pressSpaceLabel", "_gameOverTimer", "_gameOverMusic")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hukmd")
+_gameOverLabel = NodePath("MarginContainer/GameOverLabel")
+_pressSpaceLabel = NodePath("MarginContainer/PressSpaceLabel")
+_gameOverTimer = NodePath("GameoverTimer")
+_gameOverMusic = NodePath("GameOverSound")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2027705214]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer" unique_id=1215222175]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "000"
+label_settings = SubResource("LabelSettings_6wd7v")
+vertical_alignment = 1
+
+[node name="GameOverLabel" type="Label" parent="MarginContainer" unique_id=1614263913]
+visible = false
+layout_mode = 2
+text = "Game Over"
+label_settings = ExtResource("2_hukmd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PressSpaceLabel" type="Label" parent="MarginContainer" unique_id=972114490]
+visible = false
+layout_mode = 2
+text = "Press Space"
+label_settings = SubResource("LabelSettings_ar76i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameoverTimer" type="Timer" parent="." unique_id=1114830507]
+wait_time = 1.5
+one_shot = true
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="." unique_id=2039950838]
+stream = ExtResource("4_6wd7v")
+volume_db = -12.0

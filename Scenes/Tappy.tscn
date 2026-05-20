@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://conn4bs0pciuy"]
 
-[ext_resource type="Script" uid="uid://cjnm3wq7exotc" path="res://Scenes/Tappy.cs" id="1_8q405"]
+[ext_resource type="Script" uid="uid://cjnm3wq7exotc" path="res://Scripts/Tappy.cs" id="1_8q405"]
 [ext_resource type="Texture2D" uid="uid://bk1weshdrxkh8" path="res://Assets/plane/planes_sheet.png" id="1_4873g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8q405"]
@@ -35,9 +35,48 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_4873g"]
 radius = 26.0
 
-[node name="Tappy" type="CharacterBody2D" unique_id=1517664238 node_paths=PackedStringArray("sprite")]
+[sub_resource type="Animation" id="Animation_8q405"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_e6i1y"]
+resource_name = "jump"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.3490658503988659, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oox8k"]
+_data = {
+&"RESET": SubResource("Animation_8q405"),
+&"jump": SubResource("Animation_e6i1y")
+}
+
+[node name="Tappy" type="CharacterBody2D" unique_id=1517664238 node_paths=PackedStringArray("sprite", "animator")]
 script = ExtResource("1_8q405")
 sprite = NodePath("AnimatedSprite2D")
+animator = NodePath("AnimationPlayer")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=827945776]
 scale = Vector2(0.75, 0.75)
@@ -49,3 +88,6 @@ frame_progress = 0.13611443
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1502735450]
 position = Vector2(7, 0)
 shape = SubResource("CircleShape2D_4873g")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1987940399]
+libraries/ = SubResource("AnimationLibrary_oox8k")
