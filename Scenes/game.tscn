@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cmvi8rt67bmrw"]
 
 [ext_resource type="Script" uid="uid://dv77v54c5758j" path="res://Scripts/Game.cs" id="1_ebmjs"]
+[ext_resource type="PackedScene" uid="uid://ye224tq0w3bb" path="res://Scenes/ScrollingBg.tscn" id="2_i6g32"]
 [ext_resource type="Texture2D" uid="uid://cans3ib37iggd" path="res://Assets/background/rocks_2.png" id="2_qxrlw"]
 [ext_resource type="PackedScene" uid="uid://conn4bs0pciuy" path="res://Scenes/Tappy.tscn" id="3_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://cnfpsopn72oo7" path="res://Scenes/Barrier.tscn" id="4_3dryh"]
@@ -13,7 +14,11 @@ _pipesHolder = NodePath("PipesHolder")
 _upperMarker = NodePath("UpperSpawn")
 _lowerMarker = NodePath("LowerSpawn")
 
+[node name="ScrollingBg" parent="." unique_id=1600069290 instance=ExtResource("2_i6g32")]
+scale = Vector2(0.79, 0.79)
+
 [node name="Rocks2" type="Sprite2D" parent="." unique_id=1157433534]
+visible = false
 position = Vector2(252, 309)
 texture = ExtResource("2_qxrlw")
 

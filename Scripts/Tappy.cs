@@ -8,8 +8,9 @@ public partial class Tappy : CharacterBody2D
 	const float JUMP_POWER = -350.0f;
 
 	public const string GROUP_NAME = "tappy";
-	[Export] AnimatedSprite2D sprite;
-	[Export] AnimationPlayer animator;
+	[Export] AnimatedSprite2D _sprite;
+	[Export] AnimationPlayer _animator;
+	[Export] AudioStreamPlayer _engineSound;
 
 	
 	
@@ -29,7 +30,7 @@ public partial class Tappy : CharacterBody2D
 		if (@event.IsActionPressed("jump"))
 		{
 			_isJumped = true;
-			animator.Play("jump");
+			_animator.Play("jump");
 		}
 	}
 
@@ -66,7 +67,7 @@ public partial class Tappy : CharacterBody2D
 	{
 		SignalHub.EmitTappyDiedSignal();
 		SetPhysicsProcess(false);
-		sprite.Stop();
+		_sprite.Stop();
 		//GetTree().Paused = true;
     }
 

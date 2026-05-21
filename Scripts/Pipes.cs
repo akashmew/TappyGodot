@@ -6,7 +6,10 @@ public partial class Pipes : Node2D
 {
 
 	const float SCROLL_SPEED = 120.0f;
+
+	private bool _isLaserActive = true;
 	[Export] private VisibleOnScreenNotifier2D _notifier;
+	[Export] private AudioStreamPlayer _scoreSfx;
 	[Export] Area2D _upperPipe;
 	[Export] Area2D _lowerPipe;
 	[Export] Area2D _laser;
@@ -17,13 +20,28 @@ public partial class Pipes : Node2D
 		_upperPipe.BodyEntered += OnPipeBodyEntered;
 		_lowerPipe.BodyEntered += OnPipeBodyEntered;
 		_laser.BodyExited += OnLaserExited;
+		SignalHub.Instance.OnTappyDied += OnTappyDied;
 	}
+
+    public override void _ExitTree()
+    {
+       SignalHub.Instance.OnTappyDied -= OnTappyDied;
+    }
+
+
+    private void OnTappyDied()
+	{
+		DisconnectLaser();
+	}
+
 
     private void OnLaserExited(Node2D body)
     {
 		if (body is Tappy)
 		{
-			GD.Print("points scored");	
+			SignalHub.EmitPointsScore();
+			_scoreSfx.Play();
+			DisconnectLaser();
 		}
     }
 
@@ -36,12 +54,22 @@ public partial class Pipes : Node2D
 		}
     }
 
+	private void DisconnectLaser()
+	{
+		if (_isLaserActive)
+		{
+			_laser.BodyExited -= OnLaserExited;
+			_isLaserActive = false;
+		}
+		
+	}
+
 
     private void OffScreen()
-    {
+	{
 		GD.Print("Pipes removed");
 		QueueFree();
-    }
+	}
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(double delta)

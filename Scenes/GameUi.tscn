@@ -19,7 +19,7 @@ font_color = Color(0.74928486, 0.6462365, 0.9734258, 1)
 outline_size = 10
 outline_color = Color(0.0002575958, 0.20206007, 0.6702326, 1)
 
-[node name="GameUI" type="Control" unique_id=153501524 node_paths=PackedStringArray("_gameOverLabel", "_pressSpaceLabel", "_gameOverTimer", "_gameOverMusic")]
+[node name="GameUI" type="Control" unique_id=153501524 node_paths=PackedStringArray("_gameOverLabel", "_pressSpaceLabel", "_scoreLabel", "_gameOverTimer", "_gameOverMusic")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,6 +29,7 @@ grow_vertical = 2
 script = ExtResource("1_hukmd")
 _gameOverLabel = NodePath("MarginContainer/GameOverLabel")
 _pressSpaceLabel = NodePath("MarginContainer/PressSpaceLabel")
+_scoreLabel = NodePath("MarginContainer/ScoreLabel")
 _gameOverTimer = NodePath("GameoverTimer")
 _gameOverMusic = NodePath("GameOverSound")
 

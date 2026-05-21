@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cjnm3wq7exotc" path="res://Scripts/Tappy.cs" id="1_8q405"]
 [ext_resource type="Texture2D" uid="uid://bk1weshdrxkh8" path="res://Assets/plane/planes_sheet.png" id="1_4873g"]
+[ext_resource type="AudioStream" uid="uid://dr4o5p8h56wd" path="res://Assets/audio/engine.mp3" id="3_e6i1y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8q405"]
 atlas = ExtResource("1_4873g")
@@ -73,10 +74,11 @@ _data = {
 &"jump": SubResource("Animation_e6i1y")
 }
 
-[node name="Tappy" type="CharacterBody2D" unique_id=1517664238 node_paths=PackedStringArray("sprite", "animator")]
+[node name="Tappy" type="CharacterBody2D" unique_id=1517664238 node_paths=PackedStringArray("_sprite", "_animator", "_engineSound")]
 script = ExtResource("1_8q405")
-sprite = NodePath("AnimatedSprite2D")
-animator = NodePath("AnimationPlayer")
+_sprite = NodePath("AnimatedSprite2D")
+_animator = NodePath("AnimationPlayer")
+_engineSound = NodePath("AudioStreamPlayer")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=827945776]
 scale = Vector2(0.75, 0.75)
@@ -91,3 +93,9 @@ shape = SubResource("CircleShape2D_4873g")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1987940399]
 libraries/ = SubResource("AnimationLibrary_oox8k")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=978049690]
+stream = ExtResource("3_e6i1y")
+volume_db = -18.79
+autoplay = true
+parameters/looping = true
