@@ -66,9 +66,9 @@ public partial class Tappy : CharacterBody2D
 	public void Die()
 	{
 		SignalHub.EmitTappyDiedSignal();
-		SetPhysicsProcess(false);
+		//SetPhysicsProcess(false);
 		_sprite.Stop();
-		//GetTree().Paused = true;
+		GetTree().Paused = true;
     }
 
     private void ApplyGravity(double delta)

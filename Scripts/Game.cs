@@ -13,13 +13,7 @@ public partial class Game : Node2D
 
 	 
 
-	   public override void _UnhandledInput(InputEvent @event)
-    {
-        if (@event.IsActionPressed("ui_cancel"))
-        {
-			GameManager.LoadMainScene();
-        }
-    }
+	
 
 	public override void _Ready()
 	{

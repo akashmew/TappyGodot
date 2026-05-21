@@ -13,6 +13,16 @@ public partial class GameUi : Control
 	[Export] AudioStreamPlayer _gameOverMusic;
 
 	private int _score = 0;
+	   public override void _UnhandledInput(InputEvent @event)
+    {
+        if (@event.IsActionPressed("ui_cancel")) GameManager.LoadMainScene();
+
+        if (_pressSpaceLabel.Visible && @event.IsActionPressed("jump"))
+        {
+            GameManager.LoadMainScene();
+            
+        }
+    }
 	public override void _Ready()
 	{
 

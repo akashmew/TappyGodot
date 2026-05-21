@@ -40,5 +40,6 @@ autostart = true
 [node name="PipesHolder" type="Node2D" parent="." unique_id=1844104997]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1375420260]
+process_mode = 3
 
 [node name="GameUI" parent="CanvasLayer" unique_id=153501524 instance=ExtResource("5_wowpa")]
